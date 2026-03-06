@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bewerbung – StartUp Contest</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">Startup<span>Contest</span></a>
+    <div class="nav-links">
+      <a href="index.html#ablauf">Ablauf</a>
+      <a href="index.html#kriterien">Kategorien</a>
+      <a href="index.html#faq">FAQ</a>
+    </div>
+  </nav>
+
+  <!-- Form Page -->
+  <div class="form-page" style="background: var(--light);">
+    <div class="form-card">
+
+      <h2>🚀 Jetzt bewerben</h2>
+      <p class="subtitle">Fülle alle Felder aus und reiche deinen Google Slides Link ein. Die Bewerbung ist kostenlos.</p>
+
+      <form id="registrationForm" novalidate>
+
+        <hr class="divider" style="margin-top: 0;" />
+        <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 1.5rem;">Über euer StartUp</p>
+
+        <!-- StartUp Name -->
+        <div class="form-group">
+          <label for="startupName">StartUp-Name <span class="required">*</span></label>
+          <input type="text" id="startupName" name="startupName" placeholder="z.B. Acme GmbH" required />
+        </div>
+
+        <!-- Gründungsjahr + Produkt -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="foundingYear">Gründungsjahr <span class="required">*</span></label>
+            <select id="foundingYear" name="foundingYear" required>
+              <option value="">Bitte wählen</option>
+              <script>
+                for (let y = new Date().getFullYear(); y >= 2010; y--) {
+                  document.write(`<option value="${y}">${y}</option>`);
+                }
+              </script>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="productName">Produkt / Leistung <span class="required">*</span></label>
+            <input type="text" id="productName" name="productName" placeholder="z.B. KI-basierte Logistik" required />
+          </div>
+        </div>
+
+        <hr class="divider" />
+        <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 1.5rem;">Ansprechpartner</p>
+
+        <!-- Name -->
+        <div class="form-group">
+          <label for="contactName">Name des Ansprechpartners <span class="required">*</span></label>
+          <input type="text" id="contactName" name="contactName" placeholder="Vorname Nachname" required />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">E-Mail-Adresse <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="name@startup.de" required />
+          <p class="form-hint">Wir senden die Bestätigung und Rückmeldung an diese Adresse.</p>
+        </div>
+
+        <!-- Postadresse -->
+        <div class="form-group">
+          <label for="address">Postanschrift <span class="required">*</span></label>
+          <textarea id="address" name="address" placeholder="Straße, Hausnummer&#10;PLZ Ort&#10;Land" required></textarea>
+        </div>
+
+        <hr class="divider" />
+        <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 1.5rem;">Deine Präsentation</p>
+
+        <!-- Google Slides Link -->
+        <div class="form-group">
+          <label for="slidesUrl">Google Slides Link <span class="required">*</span></label>
+          <input type="url" id="slidesUrl" name="slidesUrl"
+            placeholder="https://docs.google.com/presentation/d/..." required />
+          <p class="form-hint">
+            Stelle sicher, dass dein Link <strong>öffentlich zugänglich</strong> ist:
+            In Google Slides → Teilen → „Jeder mit dem Link" → Ansicht.
+          </p>
+        </div>
+
+        <!-- Datenschutz -->
+        <div class="form-group" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+          <input type="checkbox" id="privacy" name="privacy" required
+            style="width: auto; min-width: 18px; height: 18px; margin-top: 3px;" />
+          <label for="privacy" style="font-weight: 400; font-size: 0.9rem; cursor: pointer;">
+            Ich stimme zu, dass meine Daten zum Zweck der Wettbewerbsabwicklung verarbeitet werden.
+            <span class="required">*</span>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit" id="submitBtn">
+          Bewerbung einreichen →
+        </button>
+
+        <!-- Success Message -->
+        <div class="success-msg" id="successMsg">
+          <h3>🎉 Vielen Dank für deine Bewerbung!</h3>
+          <p>Wir haben deine Unterlagen erhalten und melden uns bald per E-Mail bei dir.</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMsg" style="display:none; background:#f8d7da; border:1px solid #f5c6cb; color:#721c24; padding:1rem; border-radius:8px; margin-top:1rem;">
+          <strong>Fehler beim Senden.</strong> Bitte versuche es erneut oder schreib uns direkt an gpsloco@googlemail.com.
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 StartUp Contest · <a href="mailto:gpsloco@googlemail.com">gpsloco@googlemail.com</a></p>
+  </footer>
+
+  <script>
+    // ── Google Apps Script Web App URL (nach Deployment eintragen) ──
+    // HIER die URL deines Apps Script Web Apps eintragen:
+    const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+    const form = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg = document.getElementById('errorMsg');
+
+    // Validate Google Slides URL
+    function isValidSlidesUrl(url) {
+      return url.includes('docs.google.com/presentation');
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Validate
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const slidesUrl = document.getElementById('slidesUrl').value;
+      if (!isValidSlidesUrl(slidesUrl)) {
+        alert('Bitte gib einen gültigen Google Slides Link ein (docs.google.com/presentation/...)');
+        return;
+      }
+
+      // Collect data
+      const data = {
+        timestamp: new Date().toISOString(),
+        startupName:  document.getElementById('startupName').value,
+        foundingYear: document.getElementById('foundingYear').value,
+        productName:  document.getElementById('productName').value,
+        contactName:  document.getElementById('contactName').value,
+        email:        document.getElementById('email').value,
+        address:      document.getElementById('address').value,
+        slidesUrl:    slidesUrl,
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wird gesendet…';
+
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        // no-cors gibt kein lesbares Response zurück – wir zeigen trotzdem Erfolg
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+
+      } catch (err) {
+        console.error(err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Bewerbung einreichen →';
+        errorMsg.style.display = 'block';
+      }
+    });
+  </script>
+
+</body>
+</html>
