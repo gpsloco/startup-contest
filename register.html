@@ -152,13 +152,21 @@
   </footer>
 
   <script>
+    // ── Gründungsjahr-Dropdown befüllen ──
+    const yearSelect = document.getElementById('foundingYear');
+    for (let y = new Date().getFullYear(); y >= 2010; y--) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      yearSelect.appendChild(opt);
+    }
+
     // ── Google Apps Script Web App URL (nach Deployment eintragen) ──
     // HIER die URL deines Apps Script Web Apps eintragen:
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwd7xpzvx2XS7T6_FEKUAp__eoi1YyvTk575_6Zx220Efza-Rg5OcnzwQYLh8vH4fqC/exec';
 
     const form = document.getElementById('registrationForm');
     const submitBtn = document.getElementById('submitBtn');
-    const successMsg = document.getElementById('successMsg');
     const errorMsg = document.getElementById('errorMsg');
 
     // Validate Google Slides URL
